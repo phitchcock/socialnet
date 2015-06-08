@@ -13,6 +13,8 @@ gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'devise'
 gem 'rack-timeout'
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'autoprefixer-rails'
 
 group :production do
   gem 'pg'
