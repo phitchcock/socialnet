@@ -15,6 +15,7 @@ gem 'devise'
 gem 'rack-timeout'
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'autoprefixer-rails'
+gem 'gravatarify', '~> 3.0.0'
 
 group :production do
   gem 'pg'
