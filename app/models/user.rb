@@ -9,20 +9,21 @@ class User < ActiveRecord::Base
   #validates :username, presence: true
   #validates :username, uniqueness: true
 
+  
   def request_friendship(user_2)
     self.friendships.create(friend: user_2)
   end
 
-  def active_friends
-    self.friendships.map(&:friend) + self.inverse_friendships.map(&:user)
+  def pending_friend_requests_from
+    self.inverse_friendships.where(state: "pending")
   end
 
   def pending_friend_requests_to
     self.friendships.where(state: "pending")
   end
 
-  def pending_friend_requests_from
-    self.inverse_friendships.where(state: "pending")
+  def active_friends
+    self.friendships.where(state: "active").map(&:friend) + self.inverse_friendships.where(state: "active").map(&:user)
   end
 
   def friendship_status(user_2)
@@ -43,7 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def friendship_relation(user_2)
-    friendship = Friendship.where(user_id: [self.id,user_2.id], friend_id: [self.id,user_2.id]).first
+    Friendship.where(user_id: [self.id,user_2.id], friend_id: [self.id,user_2.id]).first
   end
-  
 end

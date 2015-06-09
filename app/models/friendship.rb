@@ -1,8 +1,11 @@
 class Friendship < ActiveRecord::Base
+  
+include PublicActivity::Model
+
   belongs_to :user
   belongs_to :friend, class_name: "User"
 
-  def accept_friendship
+  def accept
     self.update_attributes(state: "active", friended_at: Time.now)
   end
 

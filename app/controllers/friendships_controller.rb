@@ -15,7 +15,20 @@ class FriendshipsController < ApplicationController
   end
 
   def accept
-    @friendsip.accept_friendship
+    @friendship.accept
+    @friendship.create_activity key: 'friendship.accepted', owner: @friendship.user, recipient: @friendship.friend
+    @friendship.create_activity key: 'friendship.accepted', owner: @friendship.friend, recipient: @friendship.user
+    redirect_to users_path, notice: "Friendship accepted"
+  end
+
+  def update
+
+    @friendship.state = "active"
+    @friendship.friended_at = Time.now
+    if @friendship.update(friendship_params)
+
+    end
+
     redirect_to users_path, notice: "Friendship accepted"
   end
 
@@ -27,6 +40,10 @@ class FriendshipsController < ApplicationController
 
   def set_friendship
     @friendsip = Friendship.find(params[:id])
+  end
+
+  def friendship_params
+    params.require(:friendship).permit!
   end
 
 end

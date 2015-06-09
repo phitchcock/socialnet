@@ -17,6 +17,7 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'autoprefixer-rails'
 gem 'gravatarify', '~> 3.0.0'
 gem 'simple_form'
+gem 'public_activity'
 
 group :production do
   gem 'pg'
@@ -29,5 +30,6 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry'
 end
 
